@@ -1,0 +1,517 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Құжатты рәсімдейміз</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&family=Rubik:wght@700;900&display=swap">
+<style>
+/* Layout: task column (pencil mascot + task card) beside a word-processor window (ribbon + paper). Stacks on phones. */
+:root{
+  --bg:#EAF1FB;
+  --surface:#FFFFFF;
+  --surface2:#DDE7F6;
+  --line:#BCCBE3;
+  --ink:#14223D;
+  --muted:#4D6086;
+  --accent:#FFB400;
+  --accent-ink:#2B1E00;
+  --blue:#2F6BFF;
+  --ok:#17935A;
+  --pink:#F2748C;
+  --wood:#F0D3A8;
+  --paper:#FFFFFF;
+  --paper-ink:#1B1B1B;
+  --c-black:#1B1B1B;
+  --c-red:#D62839;
+  --c-blue:#1F5FE0;
+  --c-green:#1E8E4E;
+  --c-orange:#E8710A;
+  --c-purple:#7B3FD0;
+  --font-display:'Rubik','Nunito',system-ui,sans-serif;
+  --font-body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1730;--surface:#17254A;--surface2:#21345F;--line:#34497C;--ink:#EAF0FF;--muted:#A5B6DB;
+    --accent:#FFC233;--accent-ink:#2B1E00;--blue:#7BA3FF;--ok:#3CCB89;--pink:#FF8FA3;--wood:#E9C998;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1730;--surface:#17254A;--surface2:#21345F;--line:#34497C;--ink:#EAF0FF;--muted:#A5B6DB;
+  --accent:#FFC233;--accent-ink:#2B1E00;--blue:#7BA3FF;--ok:#3CCB89;--pink:#FF8FA3;--wood:#E9C998;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.45;padding-inline:16px;padding-block:18px 32px}
+.wrap{max-width:1060px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
+h1{font-family:var(--font-display);font-weight:900;font-size:clamp(1.7rem,5vw,2.6rem);line-height:1.05;margin:0;text-wrap:balance}
+.sub{margin:4px 0 0;color:var(--muted);font-weight:700;font-size:.95rem;letter-spacing:.03em;text-transform:uppercase}
+.dots{display:flex;flex-wrap:wrap;gap:8px}
+.dot{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--surface);font-family:var(--font-display);font-weight:700;font-size:1rem;cursor:pointer;display:grid;place-items:center;position:relative}
+.dot.done{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.dot.cur{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue)}
+.dot.done.cur{box-shadow:0 0 0 3px var(--blue)}
+
+main{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}}
+
+.task{background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.mascot-row{display:flex;gap:12px;align-items:flex-start}
+.mascot{flex:none;width:76px;height:auto}
+.bubble{position:relative;background:var(--surface2);border-radius:14px;padding:10px 14px;font-weight:700;min-width:0;flex:1;font-size:.98rem}
+.bubble::before{content:"";position:absolute;left:-8px;top:22px;border:8px solid transparent;border-right-color:var(--surface2);border-left:0}
+.bubble.good{background:var(--ok);color:#fff}
+.bubble.good::before{border-right-color:var(--ok)}
+.lvl{font-family:var(--font-display);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.task-text{font-family:var(--font-display);font-weight:700;font-size:1.3rem;line-height:1.25;margin:0;text-wrap:balance}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.checks li{display:flex;gap:10px;align-items:center;font-weight:700;padding:6px 10px;border-radius:10px;background:var(--surface2)}
+.checks .tick{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--muted);display:grid;place-items:center;color:transparent;font-size:.9rem}
+.checks li.ok{background:transparent;outline:2px solid var(--ok)}
+.checks li.ok .tick{background:var(--ok);border-color:var(--ok);color:#fff}
+.task-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{min-height:48px;padding:0 18px;border-radius:12px;border:2px solid var(--line);background:var(--surface);font-weight:800;font-size:1rem;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:hover{border-color:var(--blue)}
+.moves{margin-left:auto;color:var(--muted);font-weight:700;font-size:.95rem;font-variant-numeric:tabular-nums}
+
+.window{background:var(--surface);border:2px solid var(--line);border-radius:10px;overflow:hidden;min-width:0}
+.titlebar{display:flex;align-items:center;gap:10px;padding:8px 14px;background:var(--blue);color:#fff;font-weight:800;font-size:.95rem}
+:root[data-theme="dark"] .titlebar{color:#0E1730}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .titlebar{color:#0E1730}}
+.titlebar .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.titlebar .saved{margin-left:auto;background:var(--ok);color:#fff;border-radius:999px;padding:2px 12px;font-size:.85rem}
+.ribbon{display:flex;flex-wrap:wrap;gap:10px 18px;padding:12px 14px;background:var(--surface2);border-bottom:2px solid var(--line)}
+.grp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.grp .cap{font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+.tb{min-width:48px;height:48px;padding:0 10px;border-radius:10px;border:2px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:800;font-size:1.1rem;cursor:pointer}
+.tb:hover{border-color:var(--blue)}
+.tb[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tb svg{display:block}
+.tb .b{font-family:var(--font-display);font-weight:900}
+.tb .i{font-style:italic;font-weight:800}
+.tb .u{text-decoration:underline;text-underline-offset:3px}
+.sz{min-width:44px;text-align:center;font-weight:800;font-variant-numeric:tabular-nums;align-self:center}
+.sw{width:40px;height:40px;border-radius:50%;border:3px solid var(--surface);outline:2px solid var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{outline:3px solid var(--ink)}
+.sw:hover{outline-color:var(--blue)}
+.save-btn{background:var(--ok);border-color:var(--ok);color:#fff}
+.save-btn:hover{border-color:var(--ink)}
+.hint{animation:pulse 0.9s ease-in-out 4}
+.hint.tb,.hint.sw{outline:4px solid var(--blue);outline-offset:2px}
+.hint.blk{outline:4px dashed var(--blue)!important}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+
+.desk{padding:22px 14px;background:var(--surface2)}
+.paper{background:var(--paper);color:var(--paper-ink);max-width:640px;margin:0 auto;padding:clamp(16px,4vw,36px);min-height:300px;box-shadow:0 2px 0 var(--line),0 10px 24px rgba(10,20,50,.18);display:flex;flex-direction:column;gap:10px;border-radius:3px}
+.paper.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.blk{padding:6px 10px;border-radius:4px;outline:2px dashed transparent;cursor:pointer;margin:0;overflow-wrap:anywhere;font-family:var(--font-body)}
+.blk:hover{outline-color:#9DB2D8}
+.blk.sel{outline:3px solid var(--blue);background:#EAF1FF}
+.blk h2{margin:0;font:inherit}
+.pick-tip{text-align:center;color:var(--muted);font-weight:700;margin:12px 0 0;font-size:.95rem}
+
+.overlay{position:fixed;inset:0;background:rgba(8,14,34,.62);display:grid;place-items:center;padding:16px;z-index:10}
+.overlay[hidden]{display:none!important}
+.card{background:var(--surface);border:3px solid var(--accent);border-radius:20px;max-width:420px;width:100%;padding:26px;display:flex;flex-direction:column;gap:14px;text-align:center}
+.card h3{font-family:var(--font-display);font-weight:900;font-size:1.9rem;margin:0}
+.card p{margin:0;font-weight:700;color:var(--muted)}
+.stars{display:flex;justify-content:center;gap:8px}
+.star{width:52px;height:52px}
+.star path{fill:var(--line);stroke:none}
+.star.on path{fill:var(--accent)}
+.star.on{animation:pop .5s both}
+.star.on:nth-child(2){animation-delay:.15s}
+.star.on:nth-child(3){animation-delay:.3s}
+@keyframes pop{0%{transform:scale(0) rotate(-40deg)}70%{transform:scale(1.25) rotate(8deg)}100%{transform:scale(1) rotate(0)}}
+.card .btn{width:100%}
+.field{display:flex;flex-direction:column;gap:6px;text-align:left}
+.field label{font-weight:800}
+.field input{height:54px;border-radius:12px;border:3px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:1.2rem;font-weight:700;padding:0 14px;width:100%}
+.field input:focus{outline:none;border-color:var(--blue)}
+.err{color:var(--c-red);font-weight:800;min-height:1.4em;font-size:.95rem}
+:root[data-theme="dark"] .err{color:#FF8A94}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .err{color:#FF8A94}}
+@media (prefers-reduced-motion: reduce){
+  .hint,.paper.shake,.star.on{animation:none}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Құжатты рәсімдейміз</h1>
+      <p class="sub">2-сынып · Цифрлық сауаттылық</p>
+    </div>
+    <nav class="dots" id="dots" aria-label="Тапсырмалар"></nav>
+  </header>
+
+  <main>
+    <section class="task" aria-label="Тапсырма">
+      <div class="mascot-row">
+        <svg class="mascot" viewBox="0 0 96 124" aria-hidden="true">
+          <rect x="26" y="20" width="44" height="74" rx="4" fill="var(--accent)"/>
+          <rect x="26" y="20" width="44" height="12" rx="4" fill="var(--pink)"/>
+          <rect x="26" y="28" width="44" height="4" fill="var(--pink)"/>
+          <path d="M26 94 L48 120 L70 94 Z" fill="var(--wood)"/>
+          <path d="M42 110 L48 120 L54 110 Z" fill="var(--paper-ink)"/>
+          <circle cx="39" cy="58" r="4.5" fill="var(--paper-ink)"/>
+          <circle cx="57" cy="58" r="4.5" fill="var(--paper-ink)"/>
+          <circle cx="33" cy="68" r="4" fill="var(--pink)" opacity=".7"/>
+          <circle cx="63" cy="68" r="4" fill="var(--pink)" opacity=".7"/>
+          <path d="M40 70 Q48 80 56 70" fill="none" stroke="var(--paper-ink)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <div class="bubble" id="bubble" aria-live="polite">Сәлем! Мен Қарындашпын.</div>
+      </div>
+      <div>
+        <div class="lvl" id="lvl"></div>
+        <p class="task-text" id="taskText"></p>
+      </div>
+      <ul class="checks" id="checks" hidden></ul>
+      <div class="task-actions">
+        <button class="btn primary" id="hintBtn" type="button">Көмек</button>
+        <button class="btn" id="resetBtn" type="button">Қайтадан</button>
+        <span class="moves" id="moves"></span>
+      </div>
+    </section>
+
+    <section class="window" aria-label="Құжат редакторы">
+      <div class="titlebar">
+        <span aria-hidden="true">▤</span>
+        <span class="name" id="docName">Атаусыз құжат</span>
+        <span class="saved" id="savedTag" hidden>Сақталды</span>
+      </div>
+      <div class="ribbon" id="ribbon">
+        <div class="grp">
+          <span class="cap">Қаріп</span>
+          <div class="row">
+            <button class="tb" data-act="bold" type="button" aria-label="Жуан" title="Жуан"><span class="b">Ж</span></button>
+            <button class="tb" data-act="italic" type="button" aria-label="Көлбеу" title="Көлбеу"><span class="i">К</span></button>
+            <button class="tb" data-act="underline" type="button" aria-label="Асты сызылған" title="Асты сызылған"><span class="u">С</span></button>
+          </div>
+        </div>
+        <div class="grp">
+          <span class="cap">Туралау</span>
+          <div class="row">
+            <button class="tb" data-act="left" type="button" aria-label="Сол жаққа" title="Сол жаққа"><svg width="24" height="20" viewBox="0 0 24 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M2 3h20M2 8h12M2 13h20M2 18h12"/></svg></button>
+            <button class="tb" data-act="center" type="button" aria-label="Ортаға" title="Ортаға"><svg width="24" height="20" viewBox="0 0 24 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M2 3h20M6 8h12M2 13h20M6 18h12"/></svg></button>
+            <button class="tb" data-act="right" type="button" aria-label="Оң жаққа" title="Оң жаққа"><svg width="24" height="20" viewBox="0 0 24 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M2 3h20M10 8h12M2 13h20M10 18h12"/></svg></button>
+          </div>
+        </div>
+        <div class="grp">
+          <span class="cap">Өлшем</span>
+          <div class="row">
+            <button class="tb" data-act="dec" type="button" aria-label="Кішірейту" title="Кішірейту">А−</button>
+            <span class="sz" id="szLabel">–</span>
+            <button class="tb" data-act="inc" type="button" aria-label="Үлкейту" title="Үлкейту">А+</button>
+          </div>
+        </div>
+        <div class="grp">
+          <span class="cap">Түс</span>
+          <div class="row" id="swRow"></div>
+        </div>
+        <div class="grp">
+          <span class="cap">Файл</span>
+          <div class="row">
+            <button class="tb save-btn" data-act="save" type="button" aria-label="Сақтау" title="Сақтау">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M4 3h13l3 3v15H4z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></svg>
+              <span>Сақтау</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="desk">
+        <div class="paper" id="paper">
+          <div class="blk" id="blk-title" data-blk="title" role="button" tabindex="0" aria-label="Тақырып"><h2 id="t-title">Менің мектебім</h2></div>
+          <div class="blk" id="blk-body" data-blk="body" role="button" tabindex="0" aria-label="Негізгі мәтін"><p id="t-body" style="margin:0">Біздің мектеп өте әдемі. Онда мен достарыммен бірге оқимын. Мен өз мектебімді жақсы көремін.</p></div>
+        </div>
+        <p class="pick-tip" id="pickTip">Мәтінді басып таңда, сонда ол көк жиектеме алады.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="overlay" id="saveDlg" hidden>
+  <form class="card" id="saveForm" role="dialog" aria-modal="true" aria-labelledby="saveH">
+    <h3 id="saveH">Құжатты сақтау</h3>
+    <div class="field">
+      <label for="fname">Файлға ат қой</label>
+      <input id="fname" type="text" maxlength="30" autocomplete="off" value="Менің мектебім">
+      <div class="err" id="fErr" role="alert"></div>
+    </div>
+    <button class="btn primary" type="submit">Сақтау</button>
+    <button class="btn" type="button" id="fCancel">Бас тарту</button>
+  </form>
+</div>
+
+<div class="overlay" id="winDlg" hidden>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="winH">
+    <h3 id="winH">Тамаша!</h3>
+    <div class="stars" id="stars" aria-hidden="true"></div>
+    <p id="winMsg"></p>
+    <button class="btn primary" id="nextBtn" type="button">Келесі тапсырма</button>
+    <button class="btn" id="againBtn" type="button">Қайта орындау</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var COLORS=[
+    {k:'black',v:'--c-black',n:'Қара'},
+    {k:'red',v:'--c-red',n:'Қызыл'},
+    {k:'blue',v:'--c-blue',n:'Көк'},
+    {k:'green',v:'--c-green',n:'Жасыл'},
+    {k:'orange',v:'--c-orange',n:'Қызғылт сары'},
+    {k:'purple',v:'--c-purple',n:'Күлгін'}
+  ];
+  var STAR='<svg class="star" viewBox="0 0 24 24"><path d="M12 1.8l3 6.6 7.2.8-5.4 4.8 1.5 7.1L12 17.4l-6.3 3.7 1.5-7.1L1.8 9.2l7.2-.8z"/></svg>';
+
+  var LV=[
+    {task:'Тақырыпты басып таңда. Сосын «Ж» (жуан) батырмасын бас.',par:2,
+     items:[{t:'Тақырып жуан',f:function(s){return s.title.b},h:{b:'title',a:['bold']}}]},
+    {task:'Тақырыпты ортаға туралау керек. Ортаңғы сызықтары бар батырманы бас.',par:2,
+     items:[{t:'Тақырып ортада',f:function(s){return s.title.al==='center'},h:{b:'title',a:['center']}}]},
+    {task:'Тақырыпты үлкейт. «А+» батырмасын бас, әріптер үлкен болғанша.',par:3,
+     items:[{t:'Тақырып үлкен',f:function(s){return s.title.sz>=30},h:{b:'title',a:['inc']}}]},
+    {task:'Тақырыпты қызыл түске бояу керек. Түстер қатарынан қызылды таңда.',par:2,
+     items:[{t:'Тақырып қызыл',f:function(s){return s.title.col==='red'},h:{b:'title',a:['c:red']}}]},
+    {task:'Негізгі мәтінді оң жаққа туралау керек. Тақырыпты емес, төмендегі мәтінді таңда.',par:2,
+     items:[{t:'Мәтін оң жақта',f:function(s){return s.body.al==='right'},h:{b:'body',a:['right']}}]},
+    {task:'Негізгі мәтінді көлбеу (К) және асты сызылған (С) ет.',par:3,
+     items:[
+       {t:'Мәтін көлбеу',f:function(s){return s.body.i},h:{b:'body',a:['italic']}},
+       {t:'Мәтіннің асты сызылған',f:function(s){return s.body.u},h:{b:'body',a:['underline']}}]},
+    {task:'Тақырыпты әдемі рәсімде: ортада тұрсын, жуан болсын, көк түсті болсын.',par:4,
+     items:[
+       {t:'Тақырып ортада',f:function(s){return s.title.al==='center'},h:{b:'title',a:['center']}},
+       {t:'Тақырып жуан',f:function(s){return s.title.b},h:{b:'title',a:['bold']}},
+       {t:'Тақырып көк түсті',f:function(s){return s.title.col==='blue'},h:{b:'title',a:['c:blue']}}]},
+    {task:'Құжатты сақта. «Сақтау» батырмасын бас та, файлға ат қой.',par:2,
+     items:[{t:'Құжат сақталды',f:function(s){return !!s.saved},h:{b:null,a:['save']}}]},
+    {task:'Соңғы тапсырма! Тізімдегі бәрін орындап, құжатты сақта.',par:8,
+     items:[
+       {t:'Тақырып ортада',f:function(s){return s.title.al==='center'},h:{b:'title',a:['center']}},
+       {t:'Тақырып жуан',f:function(s){return s.title.b},h:{b:'title',a:['bold']}},
+       {t:'Тақырып үлкен',f:function(s){return s.title.sz>=30},h:{b:'title',a:['inc']}},
+       {t:'Тақырып қара емес, түсті',f:function(s){return s.title.col!=='black'},h:{b:'title',a:['c:red','c:blue','c:green','c:orange','c:purple']}},
+       {t:'Негізгі мәтін көлбеу',f:function(s){return s.body.i},h:{b:'body',a:['italic']}},
+       {t:'Құжат сақталды',f:function(s){return !!s.saved},h:{b:null,a:['save']}}]}
+  ];
+
+  var $=function(id){return document.getElementById(id)};
+  var S,sel,moves,hinted,done,li=0,prog={stars:[]};
+  var STORE='qujat-rasimdeu-v1';
+
+  try{var raw=localStorage.getItem(STORE);if(raw){var p=JSON.parse(raw);if(p&&Array.isArray(p.stars))prog=p}}catch(e){}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(prog))}catch(e){}}
+
+  function fresh(){
+    return {title:{b:0,i:0,u:0,al:'left',sz:22,col:'black'},
+            body:{b:0,i:0,u:0,al:'left',sz:18,col:'black'},saved:null};
+  }
+
+  var timer=null;
+  function say(msg,good){
+    var b=$('bubble');b.textContent=msg;b.className='bubble'+(good?' good':'');
+  }
+
+  function buildSwatches(){
+    var row=$('swRow');
+    COLORS.forEach(function(c){
+      var b=document.createElement('button');
+      b.type='button';b.className='sw';b.dataset.act='c:'+c.k;
+      b.style.background='var('+c.v+')';
+      b.setAttribute('aria-label',c.n);b.title=c.n;b.setAttribute('aria-pressed','false');
+      row.appendChild(b);
+    });
+  }
+
+  function buildDots(){
+    var d=$('dots');d.innerHTML='';
+    LV.forEach(function(_,i){
+      var b=document.createElement('button');
+      b.type='button';b.className='dot'+(prog.stars[i]?' done':'')+(i===li?' cur':'');
+      b.textContent=i+1;
+      b.setAttribute('aria-label','Тапсырма '+(i+1)+(prog.stars[i]?', орындалды':''));
+      b.addEventListener('click',function(){startLevel(i)});
+      d.appendChild(b);
+    });
+  }
+
+  function applyFmt(id,o){
+    var el=$(id);
+    el.style.fontWeight=o.b?'800':'500';
+    el.style.fontStyle=o.i?'italic':'normal';
+    el.style.textDecoration=o.u?'underline':'none';
+    el.style.textAlign=o.al;
+    el.style.fontSize=o.sz+'px';
+    var c=COLORS.filter(function(x){return x.k===o.col})[0];
+    el.style.color='var('+c.v+')';
+  }
+
+  function allOk(){return LV[li].items.every(function(it){return it.f(S)})}
+
+  function render(){
+    applyFmt('t-title',S.title);applyFmt('t-body',S.body);
+    ['title','body'].forEach(function(k){$('blk-'+k).classList.toggle('sel',sel===k)});
+    var o=sel?S[sel]:null;
+    function pr(act,val){var e=document.querySelector('[data-act="'+act+'"]');if(e)e.setAttribute('aria-pressed',val?'true':'false')}
+    pr('bold',o&&o.b);pr('italic',o&&o.i);pr('underline',o&&o.u);
+    pr('left',o&&o.al==='left');pr('center',o&&o.al==='center');pr('right',o&&o.al==='right');
+    COLORS.forEach(function(c){pr('c:'+c.k,o&&o.col===c.k)});
+    $('szLabel').textContent=o?o.sz:'–';
+    $('pickTip').hidden=!!sel;
+    $('moves').textContent='Қадам: '+moves;
+    $('docName').textContent=S.saved?S.saved+'.docx':'Атаусыз құжат';
+    $('savedTag').hidden=!S.saved;
+    var ul=$('checks'),L=LV[li];
+    if(L.items.length>1){
+      ul.hidden=false;ul.innerHTML='';
+      L.items.forEach(function(it){
+        var li2=document.createElement('li');
+        var ok=it.f(S);li2.className=ok?'ok':'';
+        li2.innerHTML='<span class="tick">✓</span><span></span>';
+        li2.lastChild.textContent=it.t;
+        ul.appendChild(li2);
+      });
+    }else{ul.hidden=true}
+  }
+
+  function clearHints(){
+    document.querySelectorAll('.hint').forEach(function(e){e.classList.remove('hint')});
+  }
+
+  function startLevel(i){
+    li=i;S=fresh();sel=null;moves=0;hinted=false;done=false;
+    $('lvl').textContent='Тапсырма '+(i+1)+' / '+LV.length;
+    $('taskText').textContent=LV[i].task;
+    $('saveDlg').hidden=true;$('winDlg').hidden=true;
+    clearHints();buildDots();render();
+    say(i===0?'Сәлем! Мен Қарындашпын. Бірге құжат рәсімдейміз!':'Жаңа тапсырма! Сен істей аласың.');
+  }
+
+  function check(){
+    if(done||!allOk())return;
+    done=true;
+    var par=LV[li].par;
+    var st=moves<=par?3:(moves<=par+3?2:1);
+    if(hinted)st=Math.min(st,2);
+    prog.stars[li]=Math.max(prog.stars[li]||0,st);persist();buildDots();
+    say('Дұрыс! Өте жақсы!',true);
+    chime();
+    setTimeout(showWin,700,st);
+  }
+
+  function showWin(st){
+    var s='';for(var k=0;k<3;k++)s+=STAR.replace('class="star"','class="star'+(k<st?' on':'')+'"');
+    $('stars').innerHTML=s;
+    var last=li===LV.length-1;
+    var total=prog.stars.reduce(function(a,b){return a+(b||0)},0);
+    $('winH').textContent=last?'Құттықтаймыз!':'Тамаша!';
+    $('winMsg').textContent=last?'Сен құжат шеберісің! Жиналған жұлдыз: '+total+' / '+(LV.length*3)+'.':
+      (st===3?'Жұлдыздың бәрін алдың!':'Жақсы! Аз қадаммен орындасаң, жұлдыз көбірек болады.');
+    $('nextBtn').textContent=last?'Басынан бастау':'Келесі тапсырма';
+    $('winDlg').hidden=false;
+    $('nextBtn').focus();
+  }
+
+  var actx=null;
+  function chime(){
+    try{
+      actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+      [523,659,784].forEach(function(f,i){
+        var o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime+i*0.12;
+        o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0.0001,t);
+        g.gain.exponentialRampToValueAtTime(0.15,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.25);
+        o.connect(g);g.connect(actx.destination);o.start(t);o.stop(t+0.28);
+      });
+    }catch(e){}
+  }
+
+  function select(k){
+    if(sel===k)return;
+    sel=k;moves++;clearHints();render();
+    say(k==='title'?'Тақырыпты таңдадың. Енді батырманы бас.':'Негізгі мәтінді таңдадың. Енді батырманы бас.');
+  }
+
+  function act(a){
+    if(done)return;
+    if(a==='save'){openSave();return}
+    if(!sel){
+      var p=$('paper');p.classList.remove('shake');void p.offsetWidth;p.classList.add('shake');
+      say('Алдымен құжаттағы мәтінді басып таңда!');
+      return;
+    }
+    var o=S[sel];
+    if(a==='bold')o.b=o.b?0:1;
+    else if(a==='italic')o.i=o.i?0:1;
+    else if(a==='underline')o.u=o.u?0:1;
+    else if(a==='left'||a==='center'||a==='right')o.al=a;
+    else if(a==='inc')o.sz=Math.min(44,o.sz+4);
+    else if(a==='dec')o.sz=Math.max(12,o.sz-4);
+    else if(a.indexOf('c:')===0)o.col=a.slice(2);
+    moves++;clearHints();render();
+    if(!allOk())say('Жарайсың! Тапсырманы қайта оқып шық.');
+    check();
+  }
+
+  function openSave(){
+    $('fErr').textContent='';
+    $('saveDlg').hidden=false;
+    var f=$('fname');f.focus();f.select();
+  }
+  function closeSave(){$('saveDlg').hidden=true}
+
+  $('saveForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=$('fname').value.trim();
+    if(v.length<2){$('fErr').textContent='Файл атын жаз. Кемінде 2 әріп болсын.';return}
+    S.saved=v;moves+=2;closeSave();render();check();
+  });
+  $('fCancel').addEventListener('click',closeSave);
+
+  $('ribbon').addEventListener('click',function(e){
+    var b=e.target.closest('[data-act]');
+    if(b)act(b.dataset.act);
+  });
+  document.querySelectorAll('.blk').forEach(function(el){
+    el.addEventListener('click',function(){select(el.dataset.blk)});
+    el.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();select(el.dataset.blk)}
+    });
+  });
+
+  $('hintBtn').addEventListener('click',function(){
+    if(done)return;
+    var it=LV[li].items.filter(function(x){return !x.f(S)})[0];
+    if(!it)return;
+    hinted=true;clearHints();
+    var h=it.h;
+    if(h.b&&sel!==h.b){
+      var el=$('blk-'+h.b);el.classList.add('hint');
+      say(h.b==='title'?'Алдымен жоғарыдағы тақырыпты бас.':'Алдымен төмендегі негізгі мәтінді бас.');
+    }else{
+      h.a.forEach(function(a){
+        var e=document.querySelector('[data-act="'+a+'"]');if(e)e.classList.add('hint');
+      });
+      say('Көк жиектелген батырманы бас!');
+    }
+  });
+  $('resetBtn').addEventListener('click',function(){startLevel(li)});
+  $('againBtn').addEventListener('click',function(){startLevel(li)});
+  $('nextBtn').addEventListener('click',function(){
+    startLevel(li===LV.length-1?0:li+1);
+  });
+
+  buildSwatches();
+  startLevel(0);
+})();
+</script>
+
+</body></html>
